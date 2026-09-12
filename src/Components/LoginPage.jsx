@@ -10,6 +10,7 @@ import {BASE_URL} from '../Utils/constants'
 const LoginPage = () => {
     const [emailId,setEmailId] = useState("dhoni@gmail.com")
     const [password,setPassword] = useState("Dhoni@123")
+    const [error,setError] = useState("")
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const handleLogin = async ()=>{
@@ -22,7 +23,8 @@ const LoginPage = () => {
           navigate("/feed")
       }
       catch(err){
-        console.log(err.message)
+        setError(err?.response?.data)
+        console.log({err})
       }
     }
   return (
@@ -44,6 +46,7 @@ const LoginPage = () => {
           onChange={(e)=>setPassword(e.target.value)}
         />
       </label>
+        <p className='text-red-600'>{error}</p>
         <div className="card-actions justify-center">
         <button className="btn btn-primary" onClick={handleLogin}>Login</button>
         </div>

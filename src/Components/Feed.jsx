@@ -1,7 +1,7 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { BASE_URL } from '../Utils/constants';
-import FeedCard from './FeedCard';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { BASE_URL } from "../Utils/constants";
+import FeedCard from "./FeedCard";
 
 const Feed = () => {
     const [userFeed, setUserFeed] = useState([]);
@@ -24,10 +24,15 @@ const Feed = () => {
     }, []);
 
     return (
-        <div className="flex justify-center my-10">
-            {userFeed.length > 0 && (
+        <div className="h-full flex items-center justify-center py-12">
+            {userFeed.length > 0 ? (
                 <FeedCard user={userFeed[0]} />
+            ) : (
+                <p className="text-gray-400">
+                    No more users available
+                </p>
             )}
+
         </div>
     );
 };

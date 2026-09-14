@@ -1,40 +1,101 @@
-import React from 'react';
-import { Heart, X } from 'lucide-react';
+import React from "react";
+import { Heart, X, MapPin } from "lucide-react";
 
 const FeedCard = ({ user }) => {
-    const { firstName, lastName, age, PhotoUrl, skills } = user;
+    const {
+        firstName,
+        lastName,
+        age,
+        PhotoUrl,
+        skills,
+        Bio
+    } = user;
 
     return (
-        <div className="fixed inset-0 top-16 bottom-16 flex items-center justify-center bg-neutral">
-            <div className="card w-96 bg-base-300 shadow-2xl rounded-2xl overflow-hidden">
-                <div className="relative w-full h-[420px] overflow-hidden">
-                    <img
-                        className="w-full h-full object-cover object-top"
-                        src={PhotoUrl}
-                        alt={firstName}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+        <div className="w-[360px] mt-10 bg-base-100 rounded-[28px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.25)] border border-base-300">
 
-                    <div className="absolute bottom-4 left-4 text-white">
-                        <h2 className="text-2xl font-bold leading-tight">
-                            {firstName} {lastName}, {age}
-                        </h2>
-                        {skills?.length > 0 && (
-                            <p className="text-sm text-gray-200 mt-1">
-                                {skills.join(" • ")}
-                            </p>
-                        )}
+            {/* Profile Image */}
+            <div className="relative w-full h-[430px] overflow-hidden">
+
+                <img
+                    src={PhotoUrl}
+                    alt={`${firstName} ${lastName}`}
+                    className="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-105"
+                />
+
+                {/* Dark gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent" />
+
+
+                {/* Profile information */}
+                <div className="absolute bottom-6 left-6 right-6 text-white">
+
+                    <div className="flex items-end justify-between gap-4">
+                        <div>
+                            <h2 className="text-3xl font-bold tracking-tight leading-tight">
+                                {firstName} {lastName}
+                                <span className="font-normal text-2xl ml-2">
+                                    {age}
+                                </span>
+                            </h2>
+
+                            <div className="flex items-center gap-1.5 mt-2 text-sm text-gray-200">
+                                <MapPin size={15} />
+                                <span>India</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div className="card-body py-5 flex-row justify-center gap-6">
-                    <button className="btn btn-circle btn-lg bg-base-100 border-none shadow-md hover:scale-110 transition-transform">
-                        <X className="text-red-500" size={26} />
-                    </button>
-                    <button className="btn btn-circle btn-lg bg-base-100 border-none shadow-md hover:scale-110 transition-transform">
-                        <Heart className="text-green-500" size={26} />
-                    </button>
+                    {/* Skills */}
+                    {skills?.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mt-4">
+                            {skills.slice(0, 4).map((skill, index) => (
+                                <span
+                                    key={index}
+                                    className="px-3 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/10 text-xs font-medium"
+                                >
+                                    {skill}
+                                </span>
+                            ))}
+                        </div>
+                    )}
+
+                    {/* Bio */}
+                    {Bio && (
+                        <p className="mt-3 text-sm text-gray-200 leading-relaxed line-clamp-2">
+                            {Bio}
+                        </p>
+                    )}
                 </div>
+            </div>
+
+            {/* Actions */}
+            <div className="flex items-center justify-center gap-7 py-6 bg-base-100">
+
+                {/* Pass */}
+                <button
+                    type="button"
+                    className="w-16 h-16 rounded-full bg-base-200 border border-base-300 shadow-lg flex items-center justify-center hover:bg-red-50 hover:border-red-200 hover:scale-110 transition-all duration-200"
+                >
+                    <X
+                        size={30}
+                        strokeWidth={2.5}
+                        className="text-red-500"
+                    />
+                </button>
+
+                {/* Like */}
+                <button
+                    type="button"
+                    className="w-16 h-16 rounded-full bg-primary shadow-lg flex items-center justify-center hover:scale-110 hover:shadow-xl transition-all duration-200"
+                >
+                    <Heart
+                        size={30}
+                        strokeWidth={2.5}
+                        className="text-primary-content fill-current"
+                    />
+                </button>
+
             </div>
         </div>
     );

@@ -28,8 +28,8 @@ const LoginPage = () => {
       }
     }
   return (
-    <div className='flex justify-center my-10'>
-    <div className="card bg-base-200 w-96 shadow-sm">
+    <div className="min-h-full flex items-center justify-center px-4 py-10">
+        <div className="w-full max-w-md bg-base-300 rounded-2xl shadow-2xl p-8">
     <div className="card-body space-y-5">
         <h2 className="card-title justify-center">Login</h2>
         <label className="floating-label">

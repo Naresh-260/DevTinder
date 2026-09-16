@@ -118,7 +118,7 @@ const LandingPage = ()=>{
             {/* CTA */}
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a
-                href="/signup"
+                href="/login"
                 className="group flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-500 to-indigo-500 px-7 py-3.5 text-sm font-semibold shadow-xl shadow-violet-600/20 transition hover:-translate-y-0.5 hover:shadow-violet-600/30 sm:w-auto"
               >
                 Start discovering
@@ -385,7 +385,7 @@ const LandingPage = ()=>{
             </p>
 
             <a
-              href="/signup"
+              href="/login"
               className="mt-9 inline-flex items-center gap-2 rounded-xl bg-white px-7 py-3.5 text-sm font-semibold text-black transition hover:-translate-y-0.5 hover:bg-zinc-200"
             >
               Get started

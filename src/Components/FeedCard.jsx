@@ -1,8 +1,13 @@
 import React from "react";
 import { Heart, X, MapPin } from "lucide-react";
+import axios from "axios";
+import { BASE_URL } from "../Utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { removeUserFromFeed } from "../Utils/FeedSlice";
 
 const FeedCard = ({ user }) => {
     const {
+        _id,
         firstName,
         lastName,
         age,
@@ -10,6 +15,20 @@ const FeedCard = ({ user }) => {
         skills,
         Bio
     } = user;
+
+    const dispatch = useDispatch()
+
+
+    const handleUser = async (status,userId)=>{
+        try{
+        await axios.post(BASE_URL + "/request/send/"+ status + "/" + userId,
+            {},{withCredentials:true})
+        dispatch(removeUserFromFeed(userId))
+        }
+        catch(err){
+            console.log(err.message)
+        }
+    }
 
     return (
         <div className="w-[360px] mt-10 bg-base-100 rounded-[28px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.25)] border border-base-300">
@@ -75,24 +94,30 @@ const FeedCard = ({ user }) => {
                 {/* Pass */}
                 <button
                     type="button"
-                    className="w-16 h-16 rounded-full bg-base-200 border border-base-300 shadow-lg flex items-center justify-center hover:bg-red-50 hover:border-red-200 hover:scale-110 transition-all duration-200"
-                >
+                    className="w-16 h-16 rounded-full bg-base-200 border border-base-300 
+                    shadow-lg flex items-center justify-center hover:bg-red-50
+                  hover:border-red-200 hover:scale-110 transition-all duration-200"
+                    onClick={()=>handleUser("ignored",_id)}>
                     <X
                         size={30}
                         strokeWidth={2.5}
                         className="text-red-500"
+                    
                     />
                 </button>
 
                 {/* Like */}
                 <button
                     type="button"
-                    className="w-16 h-16 rounded-full bg-primary shadow-lg flex items-center justify-center hover:scale-110 hover:shadow-xl transition-all duration-200"
-                >
+                    className="w-16 h-16 rounded-full bg-primary shadow-lg flex items-center justify-center hover:scale-110 
+                    hover:shadow-xl transition-all duration-200"
+                    onClick={()=>handleUser("interested",_id)}>
+
                     <Heart
                         size={30}
                         strokeWidth={2.5}
                         className="text-primary-content fill-current"
+
                     />
                 </button>
 

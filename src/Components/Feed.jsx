@@ -2,9 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../Utils/constants";
 import FeedCard from "./FeedCard";
+import { useDispatch, useSelector } from "react-redux";
+import { addFeed } from "../Utils/FeedSlice";
 
 const Feed = () => {
-    const [userFeed, setUserFeed] = useState([]);
+    const dispatch = useDispatch()
+    const userFeed = useSelector(store=>store.feed)
 
     const fetchUserFeed = async () => {
         try {
@@ -13,18 +16,20 @@ const Feed = () => {
                 { withCredentials: true }
             );
 
-            setUserFeed(res.data.users);
+            dispatch(addFeed(res.data));
         } catch (err) {
             console.log(err);
         }
     };
 
     useEffect(() => {
-        fetchUserFeed();
+        if(!userFeed){
+            fetchUserFeed();
+        }
     }, []);
 
     return (
-        <div className="h-full flex items-center justify-center py-12">
+        userFeed && <div className="h-full flex items-center justify-center py-12">
             {userFeed.length > 0 ? (
                 <FeedCard user={userFeed[0]} />
             ) : (

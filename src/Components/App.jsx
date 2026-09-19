@@ -7,7 +7,7 @@ import Feed from "./Feed"
 import Profile from "./Profile"
 import Connections from "./Connections"
 import Requests from "./Requests"
-import LandingPage from "./landingPage"
+import LandingPage from "./LandingPage"
 import ErrorPage from "./ErrorPage"
 
 

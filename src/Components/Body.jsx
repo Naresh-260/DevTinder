@@ -24,6 +24,9 @@ const Body = () => {
              if (err.response?.status === 401) {
             navigate("/landingPage");
         }
+        else{
+            navigate("*")
+        }
         }
     };
 

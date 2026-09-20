@@ -25,7 +25,7 @@ const Body = () => {
             navigate("/landingPage");
         }
         else{
-            navigate("*")
+            navigate("/landingPage")
         }
         }
     };

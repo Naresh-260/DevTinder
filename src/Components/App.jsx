@@ -17,6 +17,7 @@ function App() {
         <BrowserRouter>
           <Routes>
           <Route path="/landingPage" element = {<LandingPage/>}/>
+          <Route path="/" element = {<LandingPage/>}/>
           <Route path="/login" element = {<LoginPage/>}/>
             <Route path="/" element={<Body/>}>
                 <Route path = "/feed" element = {<Feed/>}/>
